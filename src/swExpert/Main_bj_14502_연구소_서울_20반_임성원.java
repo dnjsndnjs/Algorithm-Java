@@ -22,7 +22,7 @@ public class Main_bj_14502_연구소_서울_20반_임성원 {
 			for(int j = 0 ; j < M; j++)
 				tmap[i][j] = map[i][j];
 		ArrayDeque<int[]> q = new ArrayDeque<>();
-		int total = blank + virus.size() - 3;
+		int total = blank - 3;
 		q.addAll(virus);
 		while(!q.isEmpty()) {
 			int[] now = q.poll();
