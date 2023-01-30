@@ -26,7 +26,21 @@ public class Main_bj_14502_연구소_서울_20반_임성원 {
 		q.addAll(virus);
 		while(!q.isEmpty()) {
 			int[] now = q.poll();
-			if(tmap[now[0]][now[1]] == 2) continue;
+			int x = now[0], y = now[1];
+			if(tmap[x][y] == 3) continue;
+			tmap[x][y] = 3;
+			total--;
+			if(max > total) {
+				return;
+			}
+			for(int i = 0; i < 4; i++) {
+				int nx = x+di[i], ny = y+dj[i];
+				if(!inRange(nx, ny) || tmap[nx][ny] != 0) continue;
+				q.add(new int[] {nx, ny});
+			}
+		}
+		if(total > max) {
+			max = total;
 		}
 	}
 
@@ -63,6 +77,7 @@ public class Main_bj_14502_연구소_서울_20반_임성원 {
 			}
 			map[i/M][i%M] = 0;
 		}
+		System.out.println(max);
 		sc.close();
 	}
 }
