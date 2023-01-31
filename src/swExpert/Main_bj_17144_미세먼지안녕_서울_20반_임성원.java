@@ -5,20 +5,21 @@ import java.io.*;
 
 public class Main_bj_17144_미세먼지안녕_서울_20반_임성원 {
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("res/input_bj_17144.txt"));
-		Scanner sc = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-		int R = sc.nextInt();
-		int C = sc.nextInt();
-		int T = sc.nextInt();
+		int R = Integer.parseInt(st.nextToken());
+		int C = Integer.parseInt(st.nextToken());
+		int T = Integer.parseInt(st.nextToken());
 
 		int mc = -1, mr1 = 0, mr2 = 0;
 		int total = 2;
 
 		int[][] room = new int[R][C];
 		for (int i = 0; i < R; i++) {
+			st = new StringTokenizer(br.readLine(), " ");
 			for (int j = 0; j < C; j++) {
-				int num = sc.nextInt();
+				int num = Integer.parseInt(st.nextToken());
 				room[i][j] = num;
 				total += num;
 				if (num < 0) {
@@ -123,5 +124,6 @@ public class Main_bj_17144_미세먼지안녕_서울_20반_임성원 {
 //			System.out.println();
 		}
 		System.out.println(total);
+		br.close();
 	}
 }
