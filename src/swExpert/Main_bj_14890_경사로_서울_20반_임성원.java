@@ -30,55 +30,53 @@ public class Main_bj_14890_경사로_서울_20반_임성원 {
 			for (int j = 1; j < N; j++) {
 				int next = map[i][j];
 				if (hr > 0) {
-					// 높이가 일정한 경우
 					if (hr == next) {
 						lr++;
-						// 단차가 2 이상인 경우
-					} else if (Math.abs(hr - next) > 1) {
-						hr = 0;
-						// 아래로 내려가는 경사로를 놓을 수 없는 경우
-					} else if (lr < 0) {
-						hr = 0;
-						// 위로 올라가는 경우
-					} else if (next > hr) {
-						hr = next;
-						lr = -L + 1;
-						// 위로 올라가는 경사로를 놓을 수 없는 경우
-						if (lr < L)
+					} else if (hr - next == -1) {
+						if (lr < L) {
 							hr = 0;
-						// 아래로 내려가는 경우
-					} else if (next < hr) {
-						hr = next;
-						lr = -L + 1;
+						} else {
+							hr = next;
+							lr = 1;
+						}
+					} else if (hr - next == 1) {
+						if (lr < 0) {
+							hr = 0;
+						} else {
+							hr = next;
+							lr = -L + 1;
+						}
+					} else {
+						hr = 0;
 					}
 				}
 				next = map[j][i];
 				if (hc > 0) {
 					if (hc == next) {
 						lc++;
-					} else if (Math.abs(hc - next) > 1) {
-						hc = 0;
-					} else if (lc < 0) {
-						hc = 0;
-					} else if (next > hc) {
-						hc = next;
-						lc = -L + 1;
-						if (lc < L)
+					} else if (hc - next == -1) {
+						if (lc < L) {
 							hc = 0;
-					} else if (next < hc) {
-						hc = next;
-						lc = -L + 1;
+						} else {
+							hc = next;
+							lc = 1;
+						}
+					} else if (hc - next == 1) {
+						if (lc < 0) {
+							hc = 0;
+						} else {
+							hc = next;
+							lc = -L + 1;
+						}
+					} else {
+						hc = 0;
 					}
 				}
 			}
-			if (hr > 0 && lr > 0)
+			if (hr > 0 && lr >= 0)
 				res++;
-			if (hc > 0 && lc > 0)
+			if (hc > 0 && lc >= 0)
 				res++;
-			if (hr > 0 && lr > 0)
-				System.out.println("row-" + i);
-			if (hc > 0 && lc > 0)
-				System.out.println("col-" + i);
 		}
 		System.out.println(res);
 		br.close();
