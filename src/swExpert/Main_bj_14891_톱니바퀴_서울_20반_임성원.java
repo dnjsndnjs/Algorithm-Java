@@ -7,14 +7,11 @@ public class Main_bj_14891_톱니바퀴_서울_20반_임성원 {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int[][] gears = new int[4][8];
+		char[][] gears = new char[4][];
 		int[] tops = new int[4];
 		
 		for (int i = 0; i < 4; i++) {
-			char[] chars = br.readLine().toCharArray();
-			for (int j = 0; j < 8; j++) {
-				gears[i][j] = chars[j] - '0';
-			}
+			gears[i] = br.readLine().toCharArray();
 		}
 		int K = Integer.parseInt(br.readLine());
 		for (int k = 0; k < K; k++) {
@@ -48,7 +45,7 @@ public class Main_bj_14891_톱니바퀴_서울_20반_임성원 {
 
 		int res = 0;
 		for (int i = 0; i < 4; i++) {
-			res += gears[i][tops[i]] << i;
+			res += (gears[i][tops[i]] - '0') << i;
 		}
 		System.out.println(res);
 	}
