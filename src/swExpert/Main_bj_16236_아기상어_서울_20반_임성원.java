@@ -63,10 +63,8 @@ public class Main_bj_16236_아기상어_서울_20반_임성원 {
 			if (v[i][j]) continue;
 			if (map[i][j] > size) continue;
 			v[i][j] = true;
-			if (map[i][j] > 0 && map[i][j] < size) {
-				System.out.printf("[%d %d %d] ", i, j, t);
+			if (map[i][j] > 0 && map[i][j] < size)
 				list.add(temp);
-			}
 			for (int d = 0; d < 4; d++) {
 				i += di[d]; j += dj[d];
 				if (i >= 0 && i < N && j >= 0 && j < N && !v[i][j] && map[i][j] <= size)
@@ -74,7 +72,6 @@ public class Main_bj_16236_아기상어_서울_20반_임성원 {
 				i -= di[d]; j -= dj[d];
 			}
 		}
-		System.out.println();
 		return list;
 	}
 }
