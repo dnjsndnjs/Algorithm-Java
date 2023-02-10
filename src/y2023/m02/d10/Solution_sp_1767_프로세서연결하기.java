@@ -8,7 +8,7 @@ public class Solution_sp_1767_프로세서연결하기 {
 	static final int[] dj = {0, 1, 0, -1};
 	
 	static int N, C, connect, maxc, ans;
-	static int[][] map; // 빈칸: 0, 코어: 1, 전선: 2, 탐색(빈칸): -1
+	static int[][] map; // 빈칸: 0, 코어: 1, 전선: 2
 	static int[] corei, corej;
 
 	public static void main(String[] args) throws Exception {
@@ -27,6 +27,9 @@ public class Solution_sp_1767_프로세서연결하기 {
 				StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 				for (int j = 0; j < N; j++) {
 					map[i][j] = Integer.parseInt(st.nextToken());
+					// 가장자리에 붙은 경우
+					if (i == 0 || i == N - 1 || j == 0 || j == N - 1)
+						continue;
 					if (map[i][j] == 1) {
 						corei[C] = i;
 						corej[C] = j;
@@ -62,7 +65,6 @@ public class Solution_sp_1767_프로세서연결하기 {
 				if (map[i][j] > 0) {
 					continue direction;
 				}
-				map[i][j] = -1;
 				i += di[d]; j += dj[d];
 			}
 			// 전선 그리기
