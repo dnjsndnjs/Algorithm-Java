@@ -1,0 +1,25 @@
+6 6
+antabcdefgtica
+antabcdefgtica
+antabcdefgtica
+antabcdefgtica
+antabcdefgtica
+antaztica
+
+1
+
+1 7
+antabbtica
+output: 0
+correct answer: 1
+
+2 7
+antaatica
+antabtica
+output: 0
+correct answer: 2
+
+1 7
+antabctica
+output: 0
+correct answer: 1
