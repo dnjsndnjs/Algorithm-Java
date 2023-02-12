@@ -30,7 +30,6 @@ public class Main_bj_16235_나무재테크_서울_20반_임성원 {
 		List<int[]> death = new ArrayList<>();
 
 		for (int i = 0; i < N; i++) {
-			;
 			st = new StringTokenizer(br.readLine(), " ");
 			for (int j = 0; j < N; j++) {
 				map[i][j] = 5;

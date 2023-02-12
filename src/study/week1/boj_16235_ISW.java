@@ -30,7 +30,6 @@ public class boj_16235_ISW {
 		List<int[]> death = new ArrayList<>();
 
 		for (int i = 0; i < N; i++) {
-			;
 			st = new StringTokenizer(br.readLine(), " ");
 			for (int j = 0; j < N; j++) {
 				map[i][j] = 5;
