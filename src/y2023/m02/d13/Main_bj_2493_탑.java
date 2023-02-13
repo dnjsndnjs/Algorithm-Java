@@ -18,14 +18,11 @@ public class Main_bj_2493_탑 {
 		
 		Deque<int[]> stack = new ArrayDeque<>();
 		for (int i = N-1; i >= 0; i--) {
-			if (stack.isEmpty() || tower[i] < stack.peek()[0]) {
-				stack.push(new int[] {tower[i], i});
-				continue;
-			}
 			while (!stack.isEmpty() && tower[i] >= stack.peek()[0]) {
 				int[] top = stack.poll();
-				ans[top[1]] = i;
+				ans[top[1]] = i+1;
 			}
+			stack.push(new int[] {tower[i], i});
 		}
 		for (int i = 0; i < N; i++)
 			sb.append(ans[i]+" ");
