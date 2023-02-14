@@ -22,11 +22,20 @@ public class Main_bj_16926_배열돌리기1 {
 		int h = Math.min(N, M)/2;
 		for (int k = 0; k < R; k++) {
 			for (int l = 0; l < h; l++) {
+				int save = map[l][l];
 				// top
-				int save = map[0][N-1];
-				for (int i = 0; i < N-1; i++) {
-					
-				}
+				for (int i = l; i < M-l-1; i++)
+					map[l][i] = map[l][i+1];
+				// right
+				for (int i = l; i < N-l-1; i++)
+					map[i][M-l-1] = map[i+1][M-l-1];
+				// bottom
+				for (int i = M-l-1; i > l; i--)
+					map[N-l-1][i] = map[N-l-1][i-1];
+				// left
+				for (int i = N-l-1; i > l; i--)
+					map[i][l] = map[i-1][l];
+				map[l+1][l] = save;
 			}
 		}
 		

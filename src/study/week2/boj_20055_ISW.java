@@ -16,8 +16,11 @@ public class boj_20055_ISW {
 		for(int i = 0; i < 2*N; i++)
 			belt[i] = Integer.parseInt(st.nextToken());
 		
-		int zb = 0; // 내구도가 0이된 벨트의 수
+		// 내구도가 0이된 벨트의 수
+		// 벨트의 내구도를 줄여서 0이 된 경우에만 증가 
+		int zb = 0;
 		int ans;
+		// 종료 조건이 ans가 증가한 후에 평가하므로 ans가 0부터 시작
 		for (ans = 0; zb < K; ans++) {
 			// 벨트 회전
 			int b_last = belt[2*N-1];
@@ -26,9 +29,11 @@ public class boj_20055_ISW {
 				if (i < N)
 					robot[i] = robot[i-1];
 			}
-			belt[0] = b_last;
-			robot[0] = 0;
+			belt[0] = b_last; // 저장해둔 값 사용
+			robot[0] = 0;     // 어차피 0
 			// 회전으로 내리는 칸에 간 경우
+			// 내리는 칸에 갔을 때 바로바로 내려주지 않으면
+			// 뒷칸의 로봇들이 이동할 수 없는 경우가 생김
 			robot[N-1] = 0;
 			// 로봇 이동
 			for (int i = N-1; i > 0; i--) {
@@ -42,6 +47,7 @@ public class boj_20055_ISW {
 				}
 			}
 			// 내리는 칸에 간 경우
+			// 윗줄 주석 참고
 			robot[N-1] = 0;
 			// 로봇 올리기
 			if (belt[0] != 0) {

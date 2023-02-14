@@ -1,9 +1,9 @@
-package y2023.m02.d14;
+package study.week2;
 
 import java.io.*;
 import java.util.*;
 
-public class Main_bj_17142_연구소3 {
+public class boj_17142_ISW {
 	static final int[] di = {-1, 0, 1, 0};
 	static final int[] dj = {0, -1, 0, 1};
 	

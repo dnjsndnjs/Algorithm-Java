@@ -1,9 +1,9 @@
-package y2023.m02.d14;
+package swExpert;
 
 import java.io.*;
 import java.util.*;
 
-public class Main_bj_17142_연구소3 {
+public class Main_bj_17142_연구소3_서울_20반_임성원 {
 	static final int[] di = {-1, 0, 1, 0};
 	static final int[] dj = {0, -1, 0, 1};
 	

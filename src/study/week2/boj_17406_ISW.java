@@ -60,7 +60,7 @@ public class boj_17406_ISW {
 			int r = ops[i][0], c = ops[i][1], s = ops[i][2];
 			for (int j = 1; j <= s; j++) {
 				// 반복문을 줄이기 위해 4개의 줄을 한번에 회전
-				//  	회전해야하는 줄의 길이가 같아서 한번에 가능
+				//   회전해야하는 줄의 길이가 같아서 한번에 가능
 				// 끝 값을 저장
 				int tt = map[r-j][c+j];
 				int tr = map[r+j][c+j];
