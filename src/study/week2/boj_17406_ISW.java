@@ -1,9 +1,9 @@
-package y2023.m02.d13;
+package study.week2;
 
 import java.io.*;
 import java.util.*;
 
-public class Main_bj_17406_배열돌리기4 {
+public class boj_17406_ISW {
 	static int N, M, K, ans;
 	static int[][] map, ops;
 	static boolean[] v;
@@ -59,23 +59,26 @@ public class Main_bj_17406_배열돌리기4 {
 			// 배열 돌리기
 			int r = ops[i][0], c = ops[i][1], s = ops[i][2];
 			for (int j = 1; j <= s; j++) {
+				// 반복문을 줄이기 위해 4개의 줄을 한번에 회전
+				//  	회전해야하는 줄의 길이가 같아서 한번에 가능
+				// 끝 값을 저장
 				int tt = map[r-j][c+j];
 				int tr = map[r+j][c+j];
 				int tb = map[r+j][c-j];
 				int tl = map[r-j][c-j];
+				// 회전 방향의 역순으로 채워나감
 				for (int k = j; k > -j; k--) {
 					map[r-j][c+k] = map[r-j][c+k-1];
 					map[r+k][c+j] = map[r+k-1][c+j];
 					map[r+j][c-k] = map[r+j][c-k+1];
 					map[r-k][c-j] = map[r-k+1][c-j];
 				}
+				// 끝 값을 있어야할 위치에 넣어줌
 				map[r-j+1][c+j] = tt;
 				map[r+j][c+j-1] = tr;
 				map[r+j-1][c-j] = tb;
 				map[r-j][c-j+1] = tl;
 			}
-//			System.out.println(cnt+" "+i+" r");
-//			print();
 			perm(cnt+1);
 			// 원상복귀
 			for (int j = 1; j <= s; j++) {
@@ -94,15 +97,7 @@ public class Main_bj_17406_배열돌리기4 {
 				map[r+j-1][c+j] = tb;
 				map[r+j][c-j+1] = tl;
 			}
-//			System.out.println(cnt+" "+i+" l");
-//			print();
 			v[i] = false;
 		}
-	}
-	
-	static void print() {
-		for (int[] m: map)
-			System.out.println(Arrays.toString(m));
-		System.out.println();
 	}
 }

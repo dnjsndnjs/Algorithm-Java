@@ -1,9 +1,9 @@
-package y2023.m02.d13;
+package swExpert;
 
 import java.io.*;
 import java.util.*;
 
-public class Main_bj_17406_배열돌리기4 {
+public class Main_bj_17406_배열돌리기4_서울_20반_임성원 {
 	static int N, M, K, ans;
 	static int[][] map, ops;
 	static boolean[] v;
