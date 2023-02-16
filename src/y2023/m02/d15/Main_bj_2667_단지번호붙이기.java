@@ -20,7 +20,6 @@ public class Main_bj_2667_단지번호붙이기 {
 			for (int j = 0; j < N; j++)
 				map[i][j] = -(in.charAt(j)-'0');
 		}
-		for (int[] m : map) System.out.println(Arrays.toString(m));
 		int cnt = 0;
 		List<Integer> list = new ArrayList<>();
 		for (int i = 0; i < N; i++) {
@@ -34,7 +33,6 @@ public class Main_bj_2667_단지번호붙이기 {
 			sb.append(list.get(i)).append("\n");
 		System.out.print(sb.toString());
 		br.close();
-		for (int[] m : map) System.out.println(Arrays.toString(m));
 	}
 	
 	static int bfs(int i, int j, int cnt) {
@@ -42,7 +40,7 @@ public class Main_bj_2667_단지번호붙이기 {
 		Deque<int[]> q = new ArrayDeque<>();
 		map[i][j] = cnt;
 		q.offer(new int[] {i, j});
-		while (q.isEmpty()) {
+		while (!q.isEmpty()) {
 			int[] ij = q.poll();
 			i = ij[0]; j = ij[1];
 			res++;

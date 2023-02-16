@@ -3,7 +3,7 @@ package study.week2;
 import java.io.*;
 import java.util.*;
 
-public class boj_17142_ISW {
+public class boj_17142_LimSW {
 	static final int[] di = {-1, 0, 1, 0};
 	static final int[] dj = {0, -1, 0, 1};
 	

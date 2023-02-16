@@ -3,7 +3,7 @@ package study.week2;
 import java.io.*;
 import java.util.*;
 
-public class boj_20055_ISW {
+public class boj_20055_LimSW {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
