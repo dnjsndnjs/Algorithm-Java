@@ -1,35 +1,33 @@
-package swExpert;
+package y2023.m02.d17;
 
 import java.io.*;
 import java.util.*;
 
-public class Main_bj_15686_치킨배달_서울_20반_임성원 {
-	static int N, M, C, H;
-	static boolean[] v = new boolean[13];
-	static int[][] cpos, hpos;
-	static int ans = Integer.MAX_VALUE;
+public class Main_bj_15686_치킨배달_서울_20_임성원 {
+	static int N, M, C, H, ans;
+	static int[][] cpos, hpos, spos;
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
-		// cpos: 치킨집의 위치
+		// C: 치킨집의 수, H: 집의 수
+		C = 0; H = 0;
 		cpos = new int[13][];
-		// hpos: 집의 위치
 		hpos = new int[2*N][];
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
 			for (int j = 0; j < N; j++) {
-				int num = st.nextToken().charAt(0) - '0';
+				int num = Integer.parseInt(st.nextToken());
 				if (num == 1)
 					hpos[H++] = new int[] {i, j};
-				if (num == 2) {
+				if (num == 2 )
 					cpos[C++] = new int[] {i, j};
-				}
 			}
 		}
-		// 살릴 치킨 집의 조합
+		ans = Integer.MAX_VALUE;
+		spos = new int[M][];
 		comb(0, 0);
 		System.out.println(ans);
 		br.close();
@@ -41,26 +39,14 @@ public class Main_bj_15686_치킨배달_서울_20반_임성원 {
 			return;
 		}
 		for (int i = start; i < C; i++) {
-			v[i] = true;
+			spos[cnt] = cpos[i];
 			comb(cnt+1, i+1);
-			v[i] = false;
 		}
 	}
 	
-	static void calc() {
+	static int calc() {
 		int res = 0;
-		for (int h = 0; h < H; h++) {
-			int home = Integer.MAX_VALUE;
-			for (int c = 0; c < C; c++) {
-				if (!v[c]) continue;
-				int temp = Math.abs(hpos[h][0] - cpos[c][0]);
-				temp += Math.abs(hpos[h][1] - cpos[c][1]);
-				if (home > temp)
-					home = temp;
-			}
-			res += home;
-		}
-		if (res < ans)
-			ans = res;
+		
+		return res;
 	}
 }

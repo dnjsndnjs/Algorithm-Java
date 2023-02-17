@@ -28,52 +28,83 @@ import java.util.*;
  큐에 물을 넣을지 얼음을 넣을지는 여러분이 설계한 '가장자리의 조건'에 따라 달라질 수 있습니다.
  */
 
+/*
+ * 맵이 너무 넓다면 bfs를 돌리는 것이 시간을 많이 먹음
+ *   bfs의 가지 못하는 점을 별개의 큐에 담고 해당 점에서부터 bfs실행(v배열 보존)
+ */
+
 public class Main_bj_3197_백조의호수 {
 	static final int[] di = {1, -1, 0, 0};
 	static final int[] dj = {0, 0, -1, 1};
 	
 	static int R, C;
-	static int[][] map;
-	Deque<int[]> water, buffer;
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		R = Integer.parseInt(st.nextToken());
 		C = Integer.parseInt(st.nextToken());
-		map = new int[R][C];
-		int scnt = 0, si = 0, sj = 0, gi = 0, gj = 0;
+		int[][] map = new int[R][C];
+		Deque<int[]> water = new ArrayDeque<>();
+		Deque<int[]> block = new ArrayDeque<>();
+		boolean[][] vw = new boolean[R][C];
+		boolean[][] vs = new boolean[R][C];
+		int gi = 0, gj = 0;
 		for (int i = 0; i < R; i++) {
 			String in = br.readLine();
 			for (int j = 0; j < C; j++) {
-				if (in.charAt(j) == 'L') {
-					map[i][j] = 0;
-					if (scnt == 0) {
-						si = i; sj = j; scnt++;
+				switch (in.charAt(j)) {
+				case 'X': map[i][j] = 1; break;
+				case 'L':
+					if (block.isEmpty()) {
+						vs[i][j] = true;
+						block.offer(new int[] {i, j});
 					} else {
-						gi = i; gj = j;
+						gi = i;
+						gj = j;
 					}
-				} else if (in.charAt(j) == 'X')
-					map[i][j] = 1;
+				default :
+					vw[i][j] = true;
+					water.offer(new int[] {i, j});
+				}
 			}
 		}
-		for (int[] m : map) System.out.println(Arrays.toString(m)); System.out.println();
-		System.out.println();
+		int ans;
+		for (ans = -1; !vs[gi][gj]; ans++) {
+			bfs(water, map, vw, false);
+			bfs(block, map, vs, true);
+//			for (int[] m : map) System.out.println(Arrays.toString(m)); System.out.println();
+		}
+//		for (int[] m : map) System.out.println(Arrays.toString(m)); System.out.println();
+		System.out.println(ans);
 		br.close();
 	}
 	
-	static void bfs(int i, int j, boolean[][] v) {
+	static void bfs(Deque<int[]> buffer, int[][] map, boolean[][] v, boolean swan) {
 		Deque<int[]> q = new ArrayDeque<>();
-		v[i][j] = true;
-		q.offer(new int[] {i, j});
+		while (!buffer.isEmpty()) {
+			int[] ij = buffer.poll();
+			int i = ij[0], j = ij[1];
+			if(!swan) map[i][j] = 0;
+			q.offer(ij);
+		}
 		while (!q.isEmpty()) {
 			int[] ij = q.poll();
-			i = ij[0]; j = ij[1];
+			int i = ij[0], j = ij[1];
 			for (int d = 0; d < 4; d++) {
 				int ni = i+di[d], nj = j+dj[d];
+				// 범위 초과
 				if (!(0 <= ni && ni < R && 0 <= nj && nj < C && !v[ni][nj])) continue;
-				v[ni][nj] = true;
-				q.offer(new int[] {ni, nj});
+				// 가장자리 조건
+				if (map[ni][nj] != 0) {
+					v[ni][nj] = true;
+					buffer.offer(new int[] {ni, nj});
+				}
+				// 백조
+				if (swan && map[ni][nj] == 0) {
+					v[ni][nj] = true;
+					q.offer(new int[] {ni, nj});
+				}
 			}
 		}
 	}
