@@ -1,4 +1,4 @@
-package swExpert;
+package y2023.m02.d21;
 
 import java.io.*;
 import java.util.*;
@@ -39,7 +39,7 @@ public class Main_bj_17144_미세먼지안녕_서울_20반_임성원 {
 						if (!(0 <= ni && ni < R && 0 <= nj && nj < C)) continue;
 						if (nj == 0 && (ni == mr || ni == mr+1)) continue;
 						tmap[ni][nj] += dust;
-						tmap[i][j] -= dust; 
+						tmap[i][j] -= dust;
 					}
 				}
 			}
