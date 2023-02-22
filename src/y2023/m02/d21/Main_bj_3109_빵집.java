@@ -10,7 +10,9 @@ import java.util.*;
  */
 
 public class Main_bj_3109_빵집 {
-	static int R, C, ans;
+	static final int[] di = {-1, 0, 1};
+	
+	static int R, C;
 	static int[][] map;
 	
 	public static void main(String[] args) throws Exception {
@@ -25,6 +27,7 @@ public class Main_bj_3109_빵집 {
 				if (in.charAt(j) == 'x') map[i][j] = 1;
 			}
 		}
+		int ans = 0;
 		for (int i = 0; i < R; i++) {
 			if (dfs(i, 0)) ans++;
 		}
@@ -37,12 +40,9 @@ public class Main_bj_3109_빵집 {
 		if (j == C) return true;
 		if (map[i][j] != 0) return false;
 		map[i][j] = 2;
-		if (dfs(i-1, j+1))
-			return true;
-		if (dfs(i, j+1))
-			return true;
-		if (dfs(i+1, j+1))
-			return true;
+		for (int d = 0; d < 3; d++) {
+			if (dfs(i+di[d], j+1)) return true;
+		}
 		return false;
 	}
 }
