@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class Solution_sp_5644_무선충전_서울_20반_임성원 {
-	static final int[] dx = {0, -1, 0, 1, 0}, dy = {0, 0, 1, 0, -1};
+	static final int[] dx = {0, 0, 1, 0, -1}, dy = {0, -1, 0, 1, 0};
 	
 	static class BC {
 		int x, y, c, p;
@@ -47,12 +47,8 @@ public class Solution_sp_5644_무선충전_서울_20반_임성원 {
 					if (Math.abs(ax-charger[i].x)+Math.abs(ay-charger[i].y) <= charger[i].c) ac[i] = true;
 					if (Math.abs(bx-charger[i].x)+Math.abs(by-charger[i].y) <= charger[i].c) bc[i] = true;
 				}
-//				System.out.println(ax+" "+ay+" "+Arrays.toString(ac));
-//				System.out.println(bx+" "+by+" "+Arrays.toString(bc));
 				ans += charge(A, ac, bc, charger);
-				System.out.print(ans+" ");
 			}
-			System.out.println();
 			sb.append("#").append(tc).append(" ").append(ans).append("\n");
 		}
 		System.out.print(sb);
@@ -61,16 +57,16 @@ public class Solution_sp_5644_무선충전_서울_20반_임성원 {
 	
 	static int charge(int A, boolean[] ac, boolean[] bc, BC[] bcs) {
 		int res = 0;
-		for(int i = 0; i < A-1; i++) {
-			for (int j = i+1; j < A; j++) {
+		for(int i = 0; i < A; i++) {
+			for (int j = i; j < A; j++) {
 				if (!ac[i] && !ac[j] && !bc[i] && !bc[j]) continue;
 				int tmp = 0;
 				if (ac[i]) tmp += bcs[i].p;
-				if (bc[j]) tmp += bcs[j].p;
+				if (bc[j] && i != j) tmp += bcs[j].p;
 				if (res < tmp) res = tmp;
 				tmp = 0;
-				if (ac[j]) tmp += bcs[j].p;
 				if (bc[i]) tmp += bcs[i].p;
+				if (ac[j] && i != j) tmp += bcs[j].p;
 				if (res < tmp) res = tmp;
 			}
 		}
