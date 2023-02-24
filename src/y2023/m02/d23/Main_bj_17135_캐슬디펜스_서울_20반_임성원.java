@@ -29,20 +29,25 @@ public class Main_bj_17135_캐슬디펜스_서울_20반_임성원 {
 	static void comb(int cnt, int start, int[] apos, int[][] map) {
 		if (cnt == 3) {
 			int res = 0;
-			for (int T = 0; T < M; T++) {
+			int[][] tmap = new int[N][M];
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < M; j++)
+					tmap[i][j] = map[i][j];
+			}
+			for (int T = 0; T < N; T++) {
 				int[][] kill = new int[3][2];
 				for (int i = 0; i < 3; i++) {
-					bfs(N-1, apos[i], map, kill[i]);
+					bfs(N-1, apos[i], tmap, kill[i]);
 				}
 				for (int i = 0; i < 3; i++) {
 					int r = kill[i][0], c = kill[i][1];
 					if (r < 0) continue;
-					if (map[r][c] != 0) res++;
-					map[r][c] = 0;
+					if (tmap[r][c] != 0) res++;
+					tmap[r][c] = 0;
 				}
-				for (int i = M-1; i > 0; i--)
-					map[i] = map[i-1];
-				map[0] = new int[M];
+				for (int i = N-1; i > 0; i--)
+					tmap[i] = tmap[i-1];
+				tmap[0] = new int[M];
 			}
 			if (ans < res) ans = res;
 			return;
@@ -62,19 +67,20 @@ public class Main_bj_17135_캐슬디펜스_서울_20반_임성원 {
 			int[] ijd = q.poll();
 			i = ijd[0]; j = ijd[1];
 			int dist = ijd[2];
+			if (dist > D) {
+				kill[0] = -1;
+				return;
+			}
 			if (map[i][j] != 0) {
 				kill[0] = i;
 				kill[1] = j;
 				return;
 			}
-			if (dist > D) {
-				kill[0] = -1;
-				return;
-			}
 			for (int d = 0; d < 3; d++) {
 				int ni = i + di[d], nj = j + dj[d], nd = dist+1;
-				if (!(0 <= ni && ni < N && 0 <= nj && nj < M)) continue;
-				if (!v[ni][nj]) q.offer(new int[] {ni, nj, nd});
+				if (!(0 <= ni && ni < N && 0 <= nj && nj < M && !v[ni][nj])) continue;
+				v[ni][nj] = true;
+				q.offer(new int[] {ni, nj, nd});
 			}
 		}
 	}
