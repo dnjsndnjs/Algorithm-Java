@@ -1,6 +1,6 @@
 package y2023.m02.d13;
 
-public class Test {
+public class ModularTest {
 	public static void main(String[] args) {
 		int N = 32;
 		int n = 0;
