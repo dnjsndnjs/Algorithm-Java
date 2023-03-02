@@ -140,19 +140,27 @@ public class Main_bj_17472_다리만들기2_서울_20반_임성원 {
 	static int primPq(int[][] g, int V) {
 		int res = 0, cnt = 0;
 		boolean[] v = new boolean[V+1];
+		int[] minE = new int[V+1];
+		for (int i = 1; i <= V; i++) minE[i] = Integer.MAX_VALUE;
 		PriorityQueue<int[]> pq = new PriorityQueue<>((x, y) -> Integer.compare(x[1], y[1]));
+		
+		minE[1] = 0;
 		pq.offer(new int[] {1, 0}); // 정점, 거리
 		while (!pq.isEmpty()) {
 			int[] cur = pq.poll();
 			int minV = cur[0];
 			int min = cur[1];
+			if (min == Integer.MAX_VALUE) return -1;
 			if (v[minV]) continue;
 			v[minV] = true;
 			res += min;
 			if (cnt++ == V-1) break;
 			for (int j = 1; j<= V; j++) {
 				if (v[j] || g[minV][j] == 0) continue;
-				pq.offer(new int[] {j, g[minV][j]});
+				if (minE[j] > g[minV][j]) {
+					minE[j] = g[minV][j];
+					pq.offer(new int[] {j, minE[j]});
+				}
 			}
 		}
 		if (cnt != V) return -1;
