@@ -9,17 +9,21 @@ public class Main_bj_1107_리모컨 {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String in = br.readLine();
+		StringTokenizer st = null;
+		
 		K = in.length();
 		N = Integer.parseInt(in);
 		M = Integer.parseInt(br.readLine());
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		
+		if (M != 0)
+			st = new StringTokenizer(br.readLine(), " ");
 		int[] error = new int[M];
 		for (int i = 0; i < M; i++)
 			error[i] = Integer.parseInt(st.nextToken());
 		Arrays.sort(error);
 		
 		ans = Math.abs(N - 100);
-		if (ans < K) {
+		if (ans <= K) {
 			System.out.println(ans);
 			System.exit(0);
 		}
@@ -31,11 +35,20 @@ public class Main_bj_1107_리모컨 {
 			if (Arrays.binarySearch(error, i) < 0)
 				num[cnt++] = i;
 		}
-		
-		
+		prod(0, 0, num);
+		System.out.println(ans);
+		br.close();
 	}
 	
-	static void comb() {
-		
+	static void prod(int cnt, int sum, int[] num) {
+		if (cnt > 0) {
+			int tmp = Math.abs(N-sum) + cnt;
+			if (ans > tmp)
+				ans = tmp;
+		}
+		if (cnt == K+1)
+			return;
+		for (int i = 0; i < M; i++)
+			prod(cnt+1, sum*10+num[i], num);
 	}
 }
