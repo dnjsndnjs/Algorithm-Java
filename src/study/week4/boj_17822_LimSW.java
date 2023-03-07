@@ -87,5 +87,6 @@ public class boj_17822_LimSW {
 			}
 		}
 		System.out.println(sum);
+		br.close();
 	}
 }
