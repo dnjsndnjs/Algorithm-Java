@@ -1,9 +1,9 @@
-package y2023.m03.d14;
+package study.week6;
 
 import java.io.*;
 import java.util.*;
 
-public class Main_bj_23290_마법사상어와복제 {
+public class boj_23290_LimSW {
 	static final int[] dx = {0, -1, -1, -1, 0, 1, 1, 1};
 	static final int[] dy = {-1, -1, 0, 1, 1, 1, 0, -1};
 	static final int[] di = {-1, 0, 1, 0};
