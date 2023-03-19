@@ -16,6 +16,9 @@ public class boj_14499_LimSW {
 		int x = Integer.parseInt(st.nextToken());
 		int y = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
+		// 주사위
+		// x, y, z 축으로 처리
+		// x축: 0 앞뒤, y축: 1 좌우, z축: 2 상하
 		int[][] dice = new int[3][2];
 		int[][] map = new int[N][M];
 		
@@ -53,21 +56,25 @@ public class boj_14499_LimSW {
 	
 	static void rotate(int[][] dice, int d) {
 		switch(d) {
+		// 동
 		case 0:
 			swap(dice, 1, 1, 2, 0);
 			swap(dice, 1, 1, 2, 1);
 			swap(dice, 1, 0, 2, 1);
 			break;
+		// 서
 		case 1:
 			swap(dice, 1, 0, 2, 1);
 			swap(dice, 1, 1, 2, 1);
 			swap(dice, 1, 1, 2, 0);
 			break;
+		// 북
 		case 2:
 			swap(dice, 0, 0, 2, 0);
 			swap(dice, 0, 0, 2, 1);
 			swap(dice, 0, 1, 2, 1);
 			break;
+		// 남
 		case 3:
 			swap(dice, 0, 1, 2, 1);
 			swap(dice, 0, 0, 2, 1);

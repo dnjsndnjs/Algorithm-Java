@@ -17,6 +17,9 @@ public class boj_23288_LimSW {
 		int K = Integer.parseInt(st.nextToken());
 		int x = 0;
 		int y = 0;
+		// 주사위
+		// x, y, z 축으로 처리
+		// x축: 0 앞뒤, y축: 1 좌우, z축: 2 상하
 		int[][] dice = {
 				{2, 5},
 				{4, 3},
@@ -30,9 +33,12 @@ public class boj_23288_LimSW {
 				map[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
+		// score: 미리 dfs를 돌려서 점수를 저장하기 위한 배열
+		// smap: 각 좌표가 score 배열의 어떤 인덱스인지 표시하는 이차원 배열
 		int cnt = 1;
 		int[] score = new int[N*M+1];
 		int[][] smap = new int[N][M];
+		// 미리 각 좌표의 점수를 계산
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
 				if (smap[i][j] != 0) continue;

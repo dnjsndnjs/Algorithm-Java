@@ -4,8 +4,10 @@ import java.io.*;
 import java.util.*;
 
 public class boj_23290_LimSW {
+	// 8방
 	static final int[] dx = {0, -1, -1, -1, 0, 1, 1, 1};
 	static final int[] dy = {-1, -1, 0, 1, 1, 1, 0, -1};
+	// 4방
 	static final int[] di = {-1, 0, 1, 0};
 	static final int[] dj = {0, -1, 0, 1};
 	static final int N = 4;
@@ -13,13 +15,14 @@ public class boj_23290_LimSW {
 	static int max;
 	static int[] root;
 	
-	static class Shark {
+	// 물고기 클래스
+	static class Fish {
 		int x, y, d;
-		Shark() {};
-		Shark(Shark s){
-			this.x = s.x;
-			this.y = s.y;
-			this.d = s.d;
+		Fish() {};
+		Fish(Fish f){
+			this.x = f.x;
+			this.y = f.y;
+			this.d = f.d;
 		}
 	}
 	
@@ -28,12 +31,15 @@ public class boj_23290_LimSW {
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		int M = Integer.parseInt(st.nextToken());
 		int S = Integer.parseInt(st.nextToken());
+		// map: 좌표에 있는 물고기의 수
+		// blood: 피냄새의 위치
 		int[][] map = new int[N][N];
 		int[][] blood = new int[N][N];
-		List<Shark> list = new ArrayList<>(M*S);
+		// 물고기를 리스트에 저장
+		List<Fish> list = new ArrayList<>(M*S);
 		
 		for (int i = 0; i < M; i++) {
-			Shark tmp = new Shark();
+			Fish tmp = new Fish();
 			st = new StringTokenizer(br.readLine(), " ");
 			tmp.x = Integer.parseInt(st.nextToken())-1;
 			tmp.y = Integer.parseInt(st.nextToken())-1;
@@ -46,10 +52,14 @@ public class boj_23290_LimSW {
 		int sy = Integer.parseInt(st.nextToken())-1;
 		
 		for (int turn = 0; turn < S; turn++) {
-			List<Shark> tlist = new ArrayList<>(M);
+			// 복제 + 물고기 이동
+			// 임시 리스트에 지금의 물고기 목록 저장
+			// 임시 맵에 좌표에 있는 물고기 숫자 저장
+			List<Fish> tlist = new ArrayList<>(M);
 			int[][] tmap = new int[N][N];
-			for (Shark s : list) {
-				Shark tmp = new Shark(s);
+			for (Fish f : list) {
+				// 물고기 이동
+				Fish tmp = new Fish(f);
 				for (int dd = 0; dd < 8; dd++) {
 					int d = tmp.d-dd;
 					if (d < 0) d += 8;
@@ -62,8 +72,10 @@ public class boj_23290_LimSW {
 				tmap[tmp.x][tmp.y]++;
 				tlist.add(tmp);
 			}
+			// max가 0인 경우를 고려하기 위해 -1로 초기화
 			max = -1;
 			root = new int[3];
+			// 상어 움직임
 			dfs(sx, sy, 0, 0, tmap, new int[3]);
 			for (int i = 0; i < 3; i++) {
 				sx += di[root[i]]; sy += dj[root[i]];
@@ -72,11 +84,14 @@ public class boj_23290_LimSW {
 					blood[sx][sy] = 3;
 				}
 			}
+			// 복제 반영
+			// 리스트에 추가
 			for (int size = tlist.size(), i = 0; i < size; i++) {
-				Shark s = tlist.get(i);
-				if (tmap[s.x][s.y] == 0) continue;
-				list.add(s);
+				Fish f = tlist.get(i);
+				if (tmap[f.x][f.y] == 0) continue;
+				list.add(f);
 			}
+			// 좌표에 물고기 숫자 추가 + blood 카운트 감소
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < N; j++) {
 					map[i][j] += tmap[i][j];
@@ -90,10 +105,12 @@ public class boj_23290_LimSW {
 	
 	static void dfs(int i, int j, int sum, int cnt, int[][] map, int[] r) {
 		int tmp = map[i][j];
+		// cnt == 0: 상어의 시작 위치
 		if (cnt != 0) {
 			sum += tmp;
 			map[i][j] = 0;
 		}
+		// root에 진행하는 방향을 저장
 		if (cnt == 3) {
 			if (max < sum) {
 				max = sum;
