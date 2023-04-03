@@ -1,13 +1,12 @@
 package algorithm;
 
-import java.io.*;
 import java.util.*;
 
 public class GraphMatrix {
 	static int N;
 	static int[][] g;
 	static boolean[] v;
-	
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		N = sc.nextInt();
@@ -19,10 +18,12 @@ public class GraphMatrix {
 			int toto = sc.nextInt();
 			g[from][toto] = g[toto][from] = 1; //
 		}
-		for(int[] a:g)System.out.println(Arrays.toString(a));System.out.println();
-		
+		for (int[] a : g)
+			System.out.println(Arrays.toString(a));
+		System.out.println();
+
 		bfs(0);
-//		dfs(0);
+		// dfs(0);
 		sc.close();
 	}
 
@@ -32,7 +33,7 @@ public class GraphMatrix {
 		q.offer(i);
 		while (!q.isEmpty()) { //
 			i = q.poll();
-			System.out.print((char)(i+'A')+" ");
+			System.out.print((char) (i + 'A') + " ");
 			for (int j = 0; j < N; j++) { //
 				if (g[i][j] != 0 && !v[j]) {
 					v[j] = true;
@@ -44,7 +45,7 @@ public class GraphMatrix {
 
 	static void dfs(int i) {
 		v[i] = true;
-		System.out.print((char)(i+'A')+" ");
+		System.out.print((char) (i + 'A') + " ");
 		for (int j = 0; j < N; j++) { //
 			if (g[i][j] != 0 && !v[j])
 				dfs(j);
@@ -52,22 +53,22 @@ public class GraphMatrix {
 	}
 }
 /*
-7
-8
-0 1
-0 2
-1 3
-1 4
-3 5
-4 5
-5 6
-2 6
-
-    A0
-   / \
-  B1 C2
- / \ /\
-D3  E4 \
- \ /    \
-  F5 -- G6
-*/
+ * 7
+ * 8
+ * 0 1
+ * 0 2
+ * 1 3
+ * 1 4
+ * 3 5
+ * 4 5
+ * 5 6
+ * 2 6
+ * 
+ * A0
+ * / \
+ * B1 C2
+ * / \ /\
+ * D3 E4 \
+ * \ / \
+ * F5 -- G6
+ */
