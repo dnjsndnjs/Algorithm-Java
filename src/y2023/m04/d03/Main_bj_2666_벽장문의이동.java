@@ -1,4 +1,4 @@
-package y2023.m04.d01;
+package y2023.m04.d03;
 
 import java.io.*;
 import java.util.*;
@@ -20,7 +20,7 @@ public class Main_bj_2666_벽장문의이동 {
 
 		int[] input = new int[N];
 		for (int i = 0; i < N; i++)
-			input[i] = Integer.parseInt(br.readLine());
+			input[i] = Integer.parseInt(br.readLine())-1;
 		System.out.println(dp(0, N, a, b, input, memo));
 		br.close();
 	}
@@ -30,18 +30,8 @@ public class Main_bj_2666_벽장문의이동 {
 			return 0;
 		}
 		if (memo[cnt][a][b] != INF) return memo[cnt][a][b];
-		// if (input[cnt] <= a);
-		return memo[cnt][a][b] = memo[cnt][b][a] = Math.min(
+		return memo[cnt][a][b] = Math.min(
 			dp(cnt+1, N, a, input[cnt], input, memo)+Math.abs(b-input[cnt]),
 			dp(cnt+1, N, input[cnt], b, input, memo)+Math.abs(a-input[cnt]));
 	}
 }
-
-/*
-8
-3 8
-2
-5
-1
-=> 5
- */

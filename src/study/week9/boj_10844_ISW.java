@@ -1,8 +1,8 @@
-package y2023.m04.d01;
+package study.week9;
 
 import java.io.*;
 
-public class Main_bj_10844_쉬운계단수 {
+public class boj_10844_ISW {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());

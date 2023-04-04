@@ -39,7 +39,7 @@ public class Floyd {
 			}
 			print();
 		}
-	
+		sc.close();
 	}
 	private static void print() {
 		for(int i=0; i<N; ++i) {
