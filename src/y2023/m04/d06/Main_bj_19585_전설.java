@@ -1,4 +1,4 @@
-package y2023.m04.d05;
+package y2023.m04.d06;
 
 import java.io.*;
 import java.util.*;
@@ -18,16 +18,15 @@ public class Main_bj_19585_전설 {
 		int N = Integer.parseInt(st.nextToken());
 
 		Node color = new Node();
-		Node nickn = new Node();
+		Set<String> nick = new HashSet<>();
 		for (int i = 0; i < C; i++)
-			insert(color, br.readLine().toCharArray(), false);
+			insert(color, br.readLine());
 		for (int i = 0; i < N; i++)
-			insert(nickn, br.readLine().toCharArray(), true);
+			nick.add(br.readLine());
 
 		int Q = Integer.parseInt(br.readLine());
 		for (int i = 0; i < Q; i++) {
-			char[] carr = br.readLine().toCharArray();
-			if (find(color, nickn, carr))
+			if (find(color, nick, br.readLine()))
 				sb.append("Yes\n");
 			else sb.append("No\n");
 		}
@@ -38,10 +37,10 @@ public class Main_bj_19585_전설 {
 		bw.close();
 	}
 
-	static void insert(Node root, char[] carr, boolean reverse) {
+	static void insert(Node root, String carr) {
 		Node node = root;
-		for (int size = carr.length, i = 0; i < size; i++) {
-			int idx = carr[reverse ? size-1-i : i]-'a';
+		for (int size = carr.length(), i = 0; i < size; i++) {
+			int idx = carr.charAt(i)-'a';
 			if (node.child[idx] == null)
 				node.child[idx] = new Node();
 			node = node.child[idx];
@@ -49,23 +48,15 @@ public class Main_bj_19585_전설 {
 		node.end = true;
 	}
 
-	static boolean find(Node color, Node nickn, char[] carr) {
-		int size = carr.length;
-		Node node = color;
-		List<Integer> idx = new ArrayList<>();
-		for (int i = 0; node != null;) {
-			if (node.end) idx.add(i);
-			if ( i == 1000 || i == size) break;
-			node = node.child[carr[i++]-'a'];
-		}
-		node = nickn;
+	static boolean find(Node root, Set<String> nick, String s) {
+		int size = s.length();
+		Node node = root;
 		for (int i = 0; node != null;) {
 			if (node.end) {
-				if (Collections.binarySearch(idx, size-i) >= 0)
-					return true;
-			};
+				if (nick.contains(s.substring(i))) return true;
+			}
 			if ( i == 1000 || i == size) break;
-			node = node.child[carr[size-1-(i++)]-'a'];
+			node = node.child[s.charAt(i++)-'a'];
 		}
 		return false;
 	}
