@@ -22,7 +22,7 @@ public class Main_bj_1786_찾기_서울_20반_임성원 {
 		int ans = 0;
 		for (int i = 0, j = 0; i < n; i++) {
 			while (j != 0 && T[i] != P[j])
-			j = table[j-1];
+				j = table[j-1];
 			if (T[i] == P[j]) j++;
 			if (j == m) {
 				ans++;
