@@ -4,7 +4,9 @@ import java.io.*;
 
 public class boj_5052_ISW {
 	static class Node {
+		// 해당 노드가 한 전화번호의 끝인 경우 +1
 		int cnt = 0;
+		// 전화번호는 0~9까지 10개의 숫자로 구성됨 -> 해쉬맵을 사용하지 않아도 됨
 		Node[] leaf = new Node[10];
 	}
 	
@@ -24,10 +26,14 @@ public class boj_5052_ISW {
 					if (node.leaf[tmp] == null)
 						node.leaf[tmp] = new Node();
 					node = node.leaf[tmp];
+					// 지금 보고 있는 전화번호가 끝나지 않았는데
+					// 중간에 이미 완성된 전화번호가 있는 경우
 					if (node.cnt != 0)
 						ans = "NO";
 				}
 				node.cnt++;
+				// 지금 보고 있는 전화번호가 끝났는데
+				// 이후에 이어지는 전화번호가 존재하는 경우
 				for (int j = 0; j < 10; j++)
 					if (node.leaf[j] != null)
 						ans = "NO";

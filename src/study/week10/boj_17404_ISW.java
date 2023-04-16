@@ -3,7 +3,7 @@ package study.week10;
 import java.io.*;
 import java.util.*;
 
-public class Main_bj_17404_RGB거리2 {
+public class boj_17404_ISW {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());

@@ -5,7 +5,9 @@ import java.util.*;
 
 public class boj_14725_ISW {
 	static class Node {
+		// 층
 		int level = 0;
+		// 이 노드에서 연결된 다음 층의 노드들을 저장하는 해시맵
 		HashMap<String, Node> map = new HashMap<>();
 	}
 	
@@ -21,6 +23,7 @@ public class boj_14725_ISW {
 			Node node = root;
 			for (int j = 0; j < M; j++) {
 				String s = st.nextToken();
+				// 다음 층에 s에 해당하는 먹이의 방이 없는 경우
 				if (!node.map.containsKey(s)) {
 					node.map.put(s, new Node());
 					node.map.get(s).level = node.level+1;
@@ -28,6 +31,7 @@ public class boj_14725_ISW {
 				node = node.map.get(s);
 			}
 		}
+		// 출력이 많을 것 같아서 BufferedWriter 사용
 		toString(root, sb);
 		bw.write(sb.toString());
 		bw.flush();
